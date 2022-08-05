@@ -17,4 +17,5 @@ and json files should be generated in the `out` folder.
 + download ocean current data
 ```
  python3 oscar_download.py
+ # proxy=127.0.0.1:1080 python3 oscar_download.py
 ```
