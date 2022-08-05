@@ -1,0 +1,8 @@
+# file
+*.json
+
+# dir
+in
+out
+ocean_currents
+wind
