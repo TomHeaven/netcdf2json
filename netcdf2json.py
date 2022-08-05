@@ -15,6 +15,7 @@ import numpy as np
 from netCDF4 import Dataset, num2date
 from datetime import datetime
 from scipy.interpolate import griddata
+import tqdm
 
 DEBUG = False
 
@@ -421,20 +422,24 @@ class WriteJSON():
 if __name__ == '__main__':
     serial = True
     base = '.'
-    out = 'out'
-    files = glob.glob(os.path.join(base, 'in', 'oscar_currents_interim_*.nc'))
+    out = 'ocean_currents_json'
+    out_dir = os.path.join(base, out)
+    if not os.path.isdir(out_dir):
+        os.makedirs(out_dir)
+        
+    files = glob.glob(os.path.join(base, 'ocean_currents', 'oscar_currents_interim_*.nc'))
 
     idx = range(len(files))
 
     if serial:
-        for f in idx:
+        for f in tqdm.tqdm(idx):
             main(f)
     else:
         pool = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
         pool.map(main, idx)
         pool.close()
 
-    files = glob.glob(os.path.join(base, 'out', '*.json'))
+    files = glob.glob(os.path.join(base, out, '*.json'))
     files = [os.path.split(i)[-1] for i in files]
     with open(os.path.join(base, 'catalog.json'), 'w') as f:
          json.dump(np.sort(files).tolist(), f)

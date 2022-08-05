@@ -5,4 +5,6 @@
 in
 out
 ocean_currents
+ocean_currents_json
 wind
+wind_json
