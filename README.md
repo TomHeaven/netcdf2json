@@ -13,9 +13,15 @@ python3 netcdf2json.py
 and json files should be generated in the `out` folder.
 + copy catalog.json and .json files in the `out` folder to `public\data\oscar` folder of the Earth project.
 
-## Tools
-+ download ocean current data
+## Data Downloading Tools
++ download ocean current data of every day from 2021 to 2022.
 ```
  python3 oscar_download.py
  # proxy=127.0.0.1:1080 python3 oscar_download.py
 ```
+and save data in `ocean_currents` folder.
++ download wind data for the last 7 days:
+```
+python3 wind_download.py
+```
+and save data in `wind` folder.
