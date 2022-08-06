@@ -5,7 +5,12 @@ import urllib
 import http.cookiejar
 import base64
 
-def download_ocean_currents(url, save_path, username = 'TomHeaven', password = 'TomSimple123'):
+def download_ocean_currents(url, save_path, username = 'TomHeaven', password = 'TomSimple123', over_write=False):
+    # print('url', url)
+    if not over_write and os.path.isfile(save_path):
+        print("Save path exists and will not overwrite.")
+        return
+    
     # print('url', url)
     password_mgr = urllib.request.HTTPPasswordMgr()
     top_level_url = "https://urs.earthdata.nasa.gov"

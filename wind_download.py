@@ -5,8 +5,12 @@ import urllib
 import http.cookiejar
 import base64
 
-def download_wind(url, save_path):
+def download_wind(url, save_path, over_write=False):
     # print('url', url)
+    if not over_write and os.path.isfile(save_path):
+        print("Save path exists and will not overwrite.")
+        return
+    
     handler = urllib.request.HTTPHandler()
     cookie_jar = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(handler, 
