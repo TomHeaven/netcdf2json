@@ -37,7 +37,7 @@ if __name__ == '__main__':
     start_date = datetime.date.today()
     if not os.path.isdir(save_folder):
         os.makedirs(save_folder)
-    for i in range(0, 10): # 过去天数
+    for i in range(0, 11): # 过去天数
         date = start_date - datetime.timedelta(days=i)
         date_str = date.strftime("%Y%m%d")
         for hour in [0, 6, 12, 18]: # 基准小时
