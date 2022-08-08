@@ -5,7 +5,12 @@ import urllib
 import http.cookiejar
 import base64
 
-def download_ocean_currents(url, save_path, username = 'TomHeaven', password = 'TomSimple123'):
+def download_ocean_currents(url, save_path, username = 'TomHeaven', password = 'TomSimple123', over_write=False):
+    # print('url', url)
+    if not over_write and os.path.isfile(save_path):
+        print("Save path exists and will not overwrite.")
+        return
+    
     # print('url', url)
     password_mgr = urllib.request.HTTPPasswordMgr()
     top_level_url = "https://urs.earthdata.nasa.gov"
@@ -37,7 +42,7 @@ def download_ocean_currents(url, save_path, username = 'TomHeaven', password = '
 if __name__ == '__main__':
     base_url = 'https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-protected/OSCAR_L4_OC_INTERIM_V2.0/oscar_currents_interim_'
     save_folder = 'ocean_currents'
-    start_date = datetime.datetime.strptime("2021-01-01", "%Y-%m-%d")
+    start_date = datetime.datetime.strptime("2020-01-01", "%Y-%m-%d")
     if not os.path.isdir(save_folder):
         os.makedirs(save_folder)
     for i in range(366+365):
