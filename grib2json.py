@@ -32,8 +32,9 @@ def main(file_path, out_path, over_write=False):
         
 def get_outfile_path(inpath):
     dir_path, filename = os.path.split(inpath)
+    filename, ext = os.path.splitext(filename)
     parts = filename.split('_')
-    outpath = os.path.join(dir_path + '_json', parts[1] + '-' + parts[0] + '-surface-level-gfs-0.25-' + parts[2] + '.json')
+    outpath = os.path.join(dir_path + '_json',  parts[1] + '-' + parts[2] + '00-'+ parts[0] + '-surface-level-gfs-0.25.json')
     return outpath
             
 
