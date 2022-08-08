@@ -29,6 +29,12 @@ def main(file_path, out_path, over_write=False):
     
     with open(out_path, 'w') as f:
         json.dump(data_json, f)
+        
+def get_outfile_path(inpath):
+    dir_path, filename = os.path.split(inpath)
+    parts = filename.split('_')
+    outpath = os.path.join(dir_path + '_json', parts[1] + '-' + parts[0] + '-surface-level-gfs-0.25.json')
+    return outpath
             
 
 if __name__ == '__main__':
@@ -45,14 +51,12 @@ if __name__ == '__main__':
 
     if serial:
         for f in tqdm.tqdm(idx):
-            out_path = files[f].replace("wind/",  out + "/")
-            out_path =  out_path.replace(".grib", '.json')
+            out_path =  get_outfile_path(files[f])
             main(files[f], out_path)
             #break
     else:
         pool = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
-        out_path = files[idx].replace("wind/", out + "/")
-        out_path =  out_path.replace(".grib", '.json')
+        out_path =  get_outfile_path(files[f])
         pool.map(main, files[idx])
         pool.close()
 
