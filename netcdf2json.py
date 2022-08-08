@@ -1,7 +1,7 @@
 """
 Read in a netCDF file and output the u and v data to json. Write one file per
 time step for compatibility with the earth package:
-    https://github.com/cambecc/earth
+    https://github.com/TomHeaven/netcdf2json
 """
 
 import os

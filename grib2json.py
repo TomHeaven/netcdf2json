@@ -1,6 +1,6 @@
 """
 The script requires grib2json to be installed correctly.
-Please refer to: https://github.com/cambecc/grib2json
+Please refer to: https://github.com/TomHeaven/necdf2json
 
 Author: TomHeaven.
 """
@@ -18,6 +18,16 @@ def main(file_path, out_path):
     #print('file_path', file_path, 'out_path', out_path)
     cmd = "grib2json -d -n -o {} {}".format(out_path, file_path)
     os.system(cmd)
+    # save to 
+    with open(out_path, 'r') as f:
+        data_json = json.load(f)
+        for i in range(2):
+            data = np.around(data_json[i]['data'], 2)
+            data_json[i]['data'] = data.tolist()
+    
+    with open(out_path, 'w') as f:
+        json.dump(data_json, f)
+            
 
 if __name__ == '__main__':
     serial = True

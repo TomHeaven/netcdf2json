@@ -1,4 +1,5 @@
 # file
+.DS_Store
 *.json
 
 # dir
