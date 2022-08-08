@@ -14,8 +14,10 @@ import tqdm
 
 DEBUG = False
 
-def main(file_path, out_path):
-    #print('file_path', file_path, 'out_path', out_path)
+def main(file_path, out_path, over_write=False):
+    if not over_write and os.path.isfile(out_path):
+        print("Save path exists and will not overwrite.")
+        return
     cmd = "grib2json -d -n -o {} {}".format(out_path, file_path)
     os.system(cmd)
     # save to 
